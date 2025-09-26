@@ -86,13 +86,16 @@ def run_automatic_analysis(_df):
 st.title("🤖 Agente Proativo de Análise de Dados (E.D.A.)")
 initialize_session_state()
 
+# Arquivo: main.py
+
 # --- Barra Lateral ---
 with st.sidebar:
     st.header("⚙️ Configuração")
     api_key = st.text_input("Chave da API do Gemini", type="password", help="Obtenha sua chave no Google AI Studio.")
     uploaded_file = st.file_uploader("Carregue seu arquivo CSV", type=["csv"])
 
-    if uploaded_file and not st.session_state.df:
+    # A CORREÇÃO ESTÁ NA LINHA 'IF' ABAIXO
+    if uploaded_file and st.session_state.df is None:
         try:
             df = pd.read_csv(uploaded_file)
             st.session_state.df = df
